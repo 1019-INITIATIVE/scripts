@@ -63,26 +63,22 @@ type User = z.infer<typeof userSchema>;
 const createUser = (userData: User) =>
 	userData.password
 		? clerkClient.users.createUser({
-				externalId: userData.userId,
-				emailAddress: [userData.email],
-				firstName: userData.firstName,
-				lastName: userData.lastName,
-				passwordDigest: userData.password,
-				passwordHasher: userData.passwordHasher,
-				privateMetadata: userData.private_metadata,
-				publicMetadata: userData.public_metadata,
-				unsafeMetadata: userData.unsafe_metadata,
-		  })
+			externalId: userData.userId,
+			emailAddress: [userData.email],
+			passwordDigest: userData.password,
+			// passwordHasher: userData.passwordHasher,
+			// privateMetadata: userData.private_metadata,
+			// publicMetadata: userData.public_metadata,
+			// unsafeMetadata: userData.unsafe_metadata,
+		})
 		: clerkClient.users.createUser({
-				externalId: userData.userId,
-				emailAddress: [userData.email],
-				firstName: userData.firstName,
-				lastName: userData.lastName,
-				skipPasswordRequirement: true,
-				privateMetadata: userData.private_metadata,
-				publicMetadata: userData.public_metadata,
-				unsafeMetadata: userData.unsafe_metadata,
-		  });
+			externalId: userData.userId,
+			emailAddress: [userData.email],
+			skipPasswordRequirement: true,
+			// privateMetadata: userData.private_metadata,
+			// publicMetadata: userData.public_metadata,
+			// unsafeMetadata: userData.unsafe_metadata,
+		});
 
 const now = new Date().toISOString().split(".")[0]; // YYYY-MM-DDTHH:mm:ss
 function appendLog(payload: any) {
